@@ -3,16 +3,16 @@
   "version": "0.0.1",
   "main": "index.js",
   "scripts": {
-    "webpack": "webpack --config conf/webpack.config.js"
+    "webpack": "webpack",
+    "webpack-build": "webpack --config conf/webpack.config.js"
   },
   "repository": "git@github.com:x7c1/halftone.git",
   "author": "x7c1",
   "license": "MIT",
   "devDependencies": {
+    "html-webpack-plugin": "^5.2.0",
     "webpack": "^5.24.0",
     "webpack-cli": "^4.5.0"
   },
-  "dependencies": {
-    "html-webpack-plugin": "^5.2.0"
-  }
+  "dependencies": {}
 }
