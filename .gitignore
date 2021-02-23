@@ -1,5 +1,8 @@
 *.log
 
+# Compiled files
+dist
+
 # Node
 node_modules
 
