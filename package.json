@@ -4,5 +4,8 @@
   "main": "index.js",
   "repository": "git@github.com:x7c1/halftone.git",
   "author": "x7c1",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "webpack": "^5.24.0"
+  }
 }
