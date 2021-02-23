@@ -1,0 +1,8 @@
+{
+  "name": "halftone",
+  "version": "0.0.1",
+  "main": "index.js",
+  "repository": "git@github.com:x7c1/halftone.git",
+  "author": "x7c1",
+  "license": "MIT"
+}
