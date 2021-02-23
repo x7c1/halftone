@@ -1,2 +1,7 @@
+*.log
+
+# Node
+node_modules
+
 # IntelliJ settings
 .idea
