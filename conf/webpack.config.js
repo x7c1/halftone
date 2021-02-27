@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const paths = (() => {
@@ -10,6 +11,8 @@ const paths = (() => {
 module.exports = {
   mode: 'production',
   entry: path.resolve(paths.ui, 'index.tsx'),
+  // see SourceMapDevToolPlugin settings
+  devtool: false,
   output: {
     filename: 'main.js',
     path: path.resolve(paths.root, 'dist'),
@@ -39,6 +42,10 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(paths.ui, 'index.html'),
+    }),
+    // https://webpack.js.org/plugins/source-map-dev-tool-plugin/
+    new webpack.SourceMapDevToolPlugin({
+      filename: '[name].js.map',
     }),
   ],
 };
