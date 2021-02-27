@@ -8,6 +8,7 @@ const paths = (() => {
 })()
 
 module.exports = {
+    mode: 'production',
     entry: path.resolve(paths.ui, 'index.js'),
     output: {
         filename: 'main.js',
