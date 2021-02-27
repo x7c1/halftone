@@ -3,20 +3,25 @@ import * as webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 const paths = (() => {
+  const pathTo = (dir: string) => ({
+    join: (x: string) => path.join(dir, x),
+  });
   const root = path.resolve(__dirname, '..');
-  const ui = path.resolve(root, 'src-ui');
-  const conf = path.resolve(root, 'conf');
-  return { root, ui, conf };
+  return {
+    root: pathTo(root),
+    ui: pathTo(path.resolve(root, 'src-ui')),
+    conf: pathTo(path.resolve(root, 'conf')),
+  };
 })();
 
 const config: webpack.Configuration = {
   mode: 'production',
-  entry: path.resolve(paths.ui, 'index.tsx'),
-  // see SourceMapDevToolPlugin settings
+  entry: paths.ui.join('index.tsx'),
+// see SourceMapDevToolPlugin settings
   devtool: false,
   output: {
     filename: 'main.js',
-    path: path.resolve(paths.root, 'dist'),
+    path: paths.root.join('dist'),
   },
   module: {
     rules: [
@@ -26,7 +31,7 @@ const config: webpack.Configuration = {
           {
             loader: 'ts-loader',
             options: {
-              configFile: path.resolve(paths.conf, 'tsconfig.json'),
+              configFile: paths.conf.join('tsconfig.json'),
             },
           },
         ],
@@ -39,7 +44,7 @@ const config: webpack.Configuration = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.resolve(paths.ui, 'index.html'),
+      template: paths.ui.join('index.html'),
     }),
     // https://webpack.js.org/plugins/source-map-dev-tool-plugin/
     new webpack.SourceMapDevToolPlugin({
