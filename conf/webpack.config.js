@@ -9,7 +9,7 @@ const paths = (() => {
 
 module.exports = {
   mode: 'production',
-  entry: path.resolve(paths.ui, 'index.js'),
+  entry: path.resolve(paths.ui, 'index.tsx'),
   output: {
     filename: 'main.js',
     path: path.resolve(paths.root, 'dist'),
@@ -26,7 +26,15 @@ module.exports = {
           },
         },
       },
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
     ],
+  },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
   },
   plugins: [
     new HtmlWebpackPlugin({
