@@ -16,4 +16,6 @@ jobs:
         with:
           node-version: '15.x'
       - run: npm install
+      - run: npm run prettier:check
+      - run: npm run eslint
       - run: npm run webpack:build
