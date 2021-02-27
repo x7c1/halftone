@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "webpack": "webpack",
-    "webpack-build": "webpack --config conf/webpack.config.js"
+    "webpack:build": "webpack --config conf/webpack.config.js"
   },
   "repository": "git@github.com:x7c1/halftone.git",
   "author": "x7c1",

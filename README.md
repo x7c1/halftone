@@ -3,5 +3,5 @@
 ## Build
 
 ```
-$ npm run webpack-build
+$ npm run webpack:build
 ```
