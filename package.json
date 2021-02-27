@@ -4,7 +4,8 @@
   "main": "index.js",
   "config": {
     "prettier_targets": [
-      "src-ui/**/*.js",
+      "src-ui/**/*.ts",
+      "src-ui/**/*.tsx",
       "conf/**/*.js"
     ]
   },
