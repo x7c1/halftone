@@ -40,6 +40,7 @@ const config: webpack.Configuration = {
     ],
   },
   resolve: {
+    // https://webpack.js.org/configuration/resolve/#resolveextensions
     extensions: ['.tsx', '.ts', '.js'],
   },
   plugins: [
