@@ -19,5 +19,5 @@ jobs:
       - run: npm run prettier:check
       - run: npm run eslint
       - run: |
-        npm run webpack:build
-        ls -alh ./dist
+          npm run webpack:build
+          ls -alh ./dist
