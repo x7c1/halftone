@@ -3,6 +3,8 @@
   "version": "0.0.1",
   "main": "index.js",
   "scripts": {
+    "prettier:check": "prettier --config conf/prettier.config.js --check src-ui/**/*.js conf/**/*.js",
+    "prettier:write": "prettier --config conf/prettier.config.js --write src-ui/**/*.js conf/**/*.js",
     "webpack": "webpack",
     "webpack:build": "webpack --config conf/webpack.config.js"
   },
