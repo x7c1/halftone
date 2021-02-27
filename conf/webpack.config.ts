@@ -17,7 +17,7 @@ const paths = (() => {
 const config: webpack.Configuration = {
   mode: 'production',
   entry: paths.ui.join('index.tsx'),
-// see SourceMapDevToolPlugin settings
+  // see SourceMapDevToolPlugin settings
   devtool: false,
   output: {
     filename: 'main.js',
