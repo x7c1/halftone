@@ -20,16 +20,6 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            plugins: ['@babel/transform-react-jsx'],
-          },
-        },
-      },
-      {
         test: /\.tsx?$/,
         use: 'ts-loader',
         exclude: /node_modules/,
