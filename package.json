@@ -11,6 +11,7 @@
     ]
   },
   "scripts": {
+    "eslint": "eslint . --ext .js,.jsx,.ts,.tsx --ignore-path conf/.eslintignore --config conf/.eslintrc.js",
     "prettier": "prettier --config conf/prettier.config.js",
     "prettier:check": "npm run prettier -- --check $npm_package_config_prettier_targets",
     "prettier:write": "npm run prettier -- --write $npm_package_config_prettier_targets",
