@@ -1,14 +1,15 @@
-const path = require('path');
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+import * as path from 'path';
+import * as webpack from 'webpack';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 const paths = (() => {
   const root = path.resolve(__dirname, '..');
   const ui = path.resolve(root, 'src-ui');
-  return { root, ui };
+  const conf = path.resolve(root, 'conf');
+  return { root, ui, conf };
 })();
 
-module.exports = {
+const config: webpack.Configuration = {
   mode: 'production',
   entry: path.resolve(paths.ui, 'index.tsx'),
   // see SourceMapDevToolPlugin settings
@@ -21,7 +22,14 @@ module.exports = {
     rules: [
       {
         test: /\.tsx?$/,
-        use: 'ts-loader',
+        use: [
+          {
+            loader: 'ts-loader',
+            options: {
+              configFile: path.resolve(paths.conf, 'tsconfig.json'),
+            },
+          },
+        ],
         exclude: /node_modules/,
       },
     ],
@@ -39,3 +47,5 @@ module.exports = {
     }),
   ],
 };
+
+export default config;

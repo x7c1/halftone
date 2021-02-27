@@ -6,6 +6,7 @@
     "prettier_targets": [
       "src-ui/**/*.ts",
       "src-ui/**/*.tsx",
+      "conf/**/*.ts",
       "conf/**/*.js"
     ]
   },
@@ -14,7 +15,7 @@
     "prettier:check": "npm run prettier -- --check $npm_package_config_prettier_targets",
     "prettier:write": "npm run prettier -- --write $npm_package_config_prettier_targets",
     "webpack": "webpack",
-    "webpack:build": "webpack --config conf/webpack.config.js"
+    "webpack:build": "TS_NODE_PROJECT='conf/tsconfig-for-webpack-config.json' webpack --config conf/webpack.config.ts"
   },
   "repository": "git@github.com:x7c1/halftone.git",
   "author": "x7c1",
