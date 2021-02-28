@@ -21,3 +21,11 @@ jobs:
       - run: |
           npm run webpack:build
           ls -lAh ./dist
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+      - run: |
+          cargo fmt -- --check
+      - run: |
+          npm run tauri:build
+          ls -lAh ./src-tauri/target/release/bundle/deb/
