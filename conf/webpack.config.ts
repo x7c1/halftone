@@ -27,6 +27,27 @@ const config: webpack.Configuration = {
   module: {
     rules: [
       {
+        test: /\.css$/i,
+        use: [
+          { loader: 'style-loader' },
+          {
+            // https://github.com/seek-oss/css-modules-typescript-loader
+            loader: 'css-modules-typescript-loader',
+          },
+          {
+            // https://github.com/webpack-contrib/css-loader
+            loader: 'css-loader?',
+            options: {
+              modules: {
+                localIdentContext: paths.ui.join(''),
+                // https://github.com/webpack/loader-utils#interpolatename
+                localIdentName: '[path][name]__[local]--[hash:base64:5]',
+              },
+            },
+          },
+        ],
+      },
+      {
         test: /\.tsx?$/,
         use: [
           {
