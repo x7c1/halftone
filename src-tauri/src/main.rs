@@ -3,9 +3,13 @@
   windows_subsystem = "windows"
 )]
 
+use halftone_core::hello;
+
 mod cmd;
 
 fn main() {
+  println!("{}", hello());
+
   tauri::AppBuilder::new()
     .invoke_handler(|_webview, arg| {
       use cmd::Cmd::*;

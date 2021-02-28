@@ -627,10 +627,19 @@ checksum = "f6503fe142514ca4799d4c26297c4248239fe8838d827db6bd6065c6ed29a6ce"
 name = "halftone"
 version = "0.1.0"
 dependencies = [
+ "halftone-core",
  "serde",
  "serde_json",
  "tauri",
  "winres",
+]
+
+[[package]]
+name = "halftone-core"
+version = "0.0.1"
+dependencies = [
+ "serde",
+ "serde_json",
 ]
 
 [[package]]
