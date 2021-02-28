@@ -1,0 +1,48 @@
+{
+  "name": "halftone",
+  "version": "0.0.1",
+  "main": "index.js",
+  "config": {
+    "prettier_targets": [
+      "src-ui/**/*.ts",
+      "src-ui/**/*.tsx",
+      "conf/**/*.ts",
+      "conf/**/*.js"
+    ]
+  },
+  "scripts": {
+    "eslint": "eslint . --ext .js,.jsx,.ts,.tsx --ignore-path conf/.eslintignore --config conf/.eslintrc.js",
+    "prettier": "prettier --config conf/prettier.config.js",
+    "prettier:check": "npm run prettier -- --check $npm_package_config_prettier_targets",
+    "prettier:write": "npm run prettier -- --write $npm_package_config_prettier_targets",
+    "webpack": "webpack",
+    "webpack:build": "TS_NODE_PROJECT='conf/tsconfig-for-webpack-config.json' webpack --config conf/webpack.config.ts",
+    "webpack:serve": "TS_NODE_PROJECT='conf/tsconfig-for-webpack-config.json' webpack serve --mode development --config conf/webpack.config.ts"
+  },
+  "repository": "git@github.com:x7c1/halftone.git",
+  "author": "x7c1",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^14.14.31",
+    "@types/react": "^17.0.2",
+    "@types/react-dom": "^17.0.1",
+    "@types/webpack": "^4.41.26",
+    "@typescript-eslint/eslint-plugin": "^4.15.2",
+    "@typescript-eslint/parser": "^4.15.2",
+    "clean-webpack-plugin": "^3.0.0",
+    "eslint": "^7.20.0",
+    "eslint-config-prettier": "^8.1.0",
+    "html-webpack-plugin": "^5.2.0",
+    "prettier": "^2.2.1",
+    "ts-loader": "^8.0.17",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.5",
+    "webpack": "^5.24.0",
+    "webpack-cli": "^4.5.0",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  }
+}
