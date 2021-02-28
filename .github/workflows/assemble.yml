@@ -24,6 +24,7 @@ jobs:
           toolchain: stable
       - run: |
           cargo fmt -- --check
+          CARGO_BUILD_TARGET_DIR=$(pwd)/src-tauri/target cargo clippy --release
       - run: |
           sudo apt update && \
           sudo apt install \
