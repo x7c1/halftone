@@ -37,6 +37,7 @@ jobs:
               squashfs-tools
       - run: |
           cargo fmt -- --check
+      - run: |
           CARGO_BUILD_TARGET_DIR=$(pwd)/src-tauri/target cargo clippy --release
       - run: |
           cargo install tauri-bundler
