@@ -3,7 +3,7 @@
     "distDir": "../dist",
     "devPath": "http://localhost:8080",
     "beforeDevCommand": "npm run webpack:serve",
-    "beforeBuildCommand": ""
+    "beforeBuildCommand": "npm run webpack:build"
   },
   "ctx": {},
   "tauri": {
