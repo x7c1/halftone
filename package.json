@@ -15,6 +15,7 @@
     "prettier": "prettier --config prettier.config.js",
     "prettier:check": "npm run prettier -- --check $npm_package_config_prettier_targets",
     "prettier:write": "npm run prettier -- --write $npm_package_config_prettier_targets",
+    "tauri:dev": "tauri dev",
     "webpack": "webpack",
     "webpack:build": "TS_NODE_PROJECT='conf/tsconfig-for-webpack-config.json' webpack --config conf/webpack.config.ts",
     "webpack:serve": "TS_NODE_PROJECT='conf/tsconfig-for-webpack-config.json' webpack serve --mode development --config conf/webpack.config.ts"
