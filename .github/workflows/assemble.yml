@@ -24,7 +24,7 @@ jobs:
       - run: |
           cargo fmt -- --check
       - run: |
-          cargo install cargo-tauri-bundle
+          cargo install tauri-bundler
       - run: |
           npm run tauri:build
           ls -lAh ./dist
