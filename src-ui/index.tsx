@@ -2,9 +2,25 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { hello } from './sample';
 import styles from './styles.css';
+import * as tauri from 'tauri/api/tauri';
 
-const name = 'Halftone';
+class App extends React.Component {
+  render() {
+    return (
+      <>
+        <h1 className={styles.sampleTitle}>{hello('Halftone')}</h1>
+        <button onClick={() => App.onClick()}>CLICK!!!</button>
+      </>
+    );
+  }
 
-const element = <h1 className={styles.sampleTitle}>{hello(name)}</h1>;
+  private static onClick() {
+    tauri.invoke({
+      cmd: 'myCustomCommand',
+      arg1: 'fooo-',
+      arg2: 123456,
+    });
+  }
+}
 
-ReactDOM.render(element, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
