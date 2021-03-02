@@ -11,6 +11,7 @@
     ]
   },
   "scripts": {
+    "cargo:build": "RUST_DEBUG=1 CARGO_BUILD_TARGET_DIR=$(pwd)/src-tauri/target cargo build",
     "eslint": "eslint . --ext .js,.jsx,.ts,.tsx --ignore-path conf/.eslintignore --config conf/.eslintrc.js",
     "prettier": "prettier --config prettier.config.js",
     "prettier:check": "npm run prettier -- --check $npm_package_config_prettier_targets",
