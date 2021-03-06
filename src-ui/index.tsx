@@ -33,7 +33,7 @@ class App extends React.Component {
     tauri
       .promisified<Response<Sample2Response>>({
         cmd: 'Sample2',
-        arg1: 'fooo-',
+        sampleArg1: 'fooo-',
         arg2: 123456,
       })
       .then(response => {

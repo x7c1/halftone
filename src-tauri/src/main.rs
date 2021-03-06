@@ -30,12 +30,10 @@ fn main() {
 
 fn handler(webview: &mut Webview<'_>, arg: &str) -> std::result::Result<(), String> {
     let command = serde_json::from_str(arg).map_err(|e| e.to_string())?;
-    println!("command: {:?}", command);
+    println!("command received: {:?}", command);
 
     match command {
-        Cmd::Sample1(task) => {
-            println!("Sample1: task={:?}", task);
-        }
+        Cmd::Sample1(task) => task.run(),
         Cmd::Sample2(task) => promise(task, webview),
     }
     Ok(())
