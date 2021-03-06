@@ -8,9 +8,12 @@ use serde::Serialize;
 use tauri::Webview;
 
 mod cmd;
+
 use cmd::Cmd;
 
 mod error;
+
+use crate::tasks::Task;
 use error::Error;
 use error::Result;
 
@@ -33,12 +36,18 @@ fn handler(webview: &mut Webview<'_>, arg: &str) -> std::result::Result<(), Stri
         Cmd::Sample1(task) => {
             println!("Sample1: task={:?}", task);
         }
-        Cmd::Sample2(task) => {
-            let (callback, error) = task.for_promise();
-            tauri::execute_promise(webview, move || to_response(task.run()), callback, error)
-        }
+        Cmd::Sample2(task) => promise(task, webview),
     }
     Ok(())
+}
+
+fn promise<A, X>(task: A, webview: &mut Webview<'_>)
+where
+    A: Task<X>,
+    X: Serialize,
+{
+    let (callback, error) = task.for_tauri();
+    tauri::execute_promise(webview, move || to_response(task.run()), callback, error)
 }
 
 fn to_response<A>(result: crate::Result<A>) -> tauri::Result<Response<A, Error>> {

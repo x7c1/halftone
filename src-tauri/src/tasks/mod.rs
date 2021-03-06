@@ -1,5 +1,13 @@
 use serde::{Deserialize, Serialize};
 
+// stands for (callback, error)
+pub type Callbacks = (String, String);
+
+pub trait Task<X>: Send + 'static {
+    fn run(&self) -> crate::Result<X>;
+    fn for_tauri(&self) -> Callbacks;
+}
+
 #[derive(Debug, Deserialize)]
 pub struct Sample1 {
     arg1: String,
@@ -14,15 +22,15 @@ pub struct Sample2 {
     error: String,
 }
 
-impl Sample2 {
-    pub fn run(&self) -> crate::Result<Sample2Response> {
+impl Task<Sample2Response> for Sample2 {
+    fn run(&self) -> crate::Result<Sample2Response> {
         let message = format!("hello...(from rust!) : {:?}", self);
         let response = Sample2Response {
             sample_greeting: message,
         };
         Ok(response)
     }
-    pub fn for_promise(&self) -> (String, String) {
+    fn for_tauri(&self) -> Callbacks {
         (self.callback.to_string(), self.error.to_string())
     }
 }
