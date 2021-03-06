@@ -10,10 +10,10 @@ edition = "2018"
 build = "src/build.rs"
 
 [dependencies]
-serde_json = "1.0"
-serde = { version = "1.0", features = [ "derive" ] }
-tauri = { version = "0.11", features = [ "all-api" ] }
 halftone-core = { path = "../src-core" }
+serde = { version = "1.0", features = [ "derive" ] }
+serde_json = "1.0"
+tauri = { version = "0.11", features = [ "all-api" ] }
 
 [target."cfg(windows)".build-dependencies]
 winres = "0.1"
