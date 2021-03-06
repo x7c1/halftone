@@ -9,17 +9,36 @@ class App extends React.Component {
     return (
       <>
         <h1 className={styles.sampleTitle}>{hello('Halftone')}</h1>
-        <button onClick={() => App.onClick()}>CLICK!!!</button>
+        <p>
+          <button onClick={() => App.onClickInvoke()}>invoke(...)</button>
+        </p>
+        <p>
+          <button onClick={() => App.onClickPromisified()}>
+            promisified(...)
+          </button>
+        </p>
       </>
     );
   }
 
-  private static onClick() {
+  private static onClickInvoke() {
     tauri.invoke({
-      cmd: 'myCustomCommand',
+      cmd: 'sampleCommand1',
       arg1: 'fooo-',
       arg2: 123456,
     });
+  }
+
+  private static onClickPromisified() {
+    tauri
+      .promisified({
+        cmd: 'sampleCommand2',
+        arg1: 'fooo-',
+        arg2: 123456,
+      })
+      .then((response) => {
+        console.log('response', response);
+      });
   }
 }
 
