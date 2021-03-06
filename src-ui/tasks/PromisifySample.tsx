@@ -1,5 +1,5 @@
 import * as tauri from 'tauri/api/tauri';
-import { BackendResponse } from '../index';
+import { BackendResult } from '../index';
 
 export interface Request {
   cmd: 'PromisifySample';
@@ -10,29 +10,17 @@ export interface Request {
 export interface Response {
   sampleGreeting: string;
 }
-//
-// export function run(request: Request): Promise<Response> {
-//   return tauri
-//     .promisified<BackendResponse<Response>>(request)
-//     .then(response => {
-//       console.debug('...response returned:', response);
-//       switch (response.type) {
-//         case 'Success':
-//           console.debug('success returned:', response.payload.sampleGreeting);
-//           return response.payload
-//           // break;
-//         case 'Failure':
-//           console.error('failure returned:', response.payload);
-//           return Promise.reject(response.payload)
-//           // switch (response.payload.type) {
-//           //   case 'IllegalOperation':
-//           //     console.error(
-//           //       'IllegalOperation returned: message:',
-//           //       response.payload.message
-//           //     );
-//           //     break;
-//           // }
-//           // break;
-//       }
-//     });
-// }
+
+export function run(request: Request): Promise<Response> {
+  return tauri
+    .promisified<BackendResult<Response>>(request)
+    .then(result => {
+      console.debug('payload from backend:', result);
+      switch (result.type) {
+        case 'Success':
+          return result.payload
+        case 'Failure':
+          return Promise.reject(result.payload)
+      }
+    });
+}

@@ -25,40 +25,23 @@ class App extends React.Component {
   private static onClickInvoke() {
     tauri.invoke({
       cmd: 'InvokeSample',
-      arg1: 'fooo-!?',
+      arg1: 'fooo',
       arg2: 123456,
     });
   }
 
   private static onClickPromisified() {
-    tauri
-      .promisified<BackendResponse<PromisifySample.Response>>({
-        cmd: 'PromisifySample',
-        sampleArg1: 'foo!?',
-        arg2: 123456,
-      })
-      .then(response => {
-        console.debug('...response returned:', response);
-        switch (response.type) {
-          case 'Success':
-            console.debug('success returned:', response.payload.sampleGreeting);
-            break;
-          case 'Failure':
-            console.error('failure returned:', response.payload);
-            switch (response.payload.type) {
-              case 'IllegalOperation':
-                console.error(
-                  'IllegalOperation returned: message:',
-                  response.payload.message
-                );
-                break;
-            }
-            break;
-        }
+    PromisifySample.run({
+      cmd: 'PromisifySample',
+      sampleArg1: 'foo',
+      arg2: 123456,
+    })
+      .then(x => {
+        console.debug('success returned:', x);
       })
       .catch(e => {
-        console.error('unexpected error detected:', e);
-      });
+        console.error('failure returned:', e);
+      })
   }
 }
 
@@ -76,6 +59,6 @@ interface Failure {
   payload: BackendError;
 }
 
-export type BackendResponse<A> = Success<A> | Failure;
+export type BackendResult<A> = Success<A> | Failure;
 
 ReactDOM.render(<App />, document.getElementById('root'));

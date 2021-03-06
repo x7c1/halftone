@@ -48,17 +48,17 @@ where
     tauri::execute_promise(webview, move || to_response(task.run()), callback, error)
 }
 
-fn to_response<A>(result: crate::Result<A>) -> tauri::Result<Response<A, Error>> {
+fn to_response<A>(result: crate::Result<A>) -> tauri::Result<BackendResult<A, Error>> {
     let response = match result {
-        Ok(x) => Response::Success(x),
-        Err(x) => Response::Failure(x),
+        Ok(x) => BackendResult::Success(x),
+        Err(x) => BackendResult::Failure(x),
     };
     Ok(response)
 }
 
 #[derive(Debug, Serialize)]
 #[serde(tag = "type", content = "payload")]
-pub enum Response<A, E> {
+pub enum BackendResult<A, E> {
     Success(A),
     Failure(E),
 }

@@ -1,5 +1,6 @@
 use crate::tasks::{Callbacks, Task};
 use serde::{Deserialize, Serialize};
+use crate::error::Error::IllegalOperation;
 
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -11,7 +12,7 @@ pub struct Request {
 }
 
 #[derive(Serialize)]
-#[serde(tag = "type", rename_all = "camelCase")]
+#[serde(rename_all = "camelCase")]
 pub struct Response {
     sample_greeting: String,
 }
@@ -23,6 +24,7 @@ impl Task<Response> for Request {
             sample_greeting: message,
         };
         Ok(response)
+        // Err(IllegalOperation { message })
     }
     fn for_tauri(&self) -> Callbacks {
         (self.callback.to_string(), self.error.to_string())
