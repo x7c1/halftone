@@ -1,5 +1,4 @@
-import * as tauri from 'tauri/api/tauri';
-import { BackendResult } from '../index';
+import {BackendTask, task} from "./backend";
 
 export interface Request {
   cmd: 'PromisifySample';
@@ -11,16 +10,4 @@ export interface Response {
   sampleGreeting: string;
 }
 
-export function run(request: Request): Promise<Response> {
-  return tauri
-    .promisified<BackendResult<Response>>(request)
-    .then(result => {
-      console.debug('payload from backend:', result);
-      switch (result.type) {
-        case 'Success':
-          return result.payload
-        case 'Failure':
-          return Promise.reject(result.payload)
-      }
-    });
-}
+export const run: BackendTask<Request, Response> = task;

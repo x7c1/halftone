@@ -41,7 +41,10 @@ class App extends React.Component {
       })
       .catch(e => {
         console.error('failure returned:', e);
-      })
+        if (e.type == 'IllegalOperation') {
+          console.error(e.message);
+        }
+      });
   }
 }
 

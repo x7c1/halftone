@@ -1,6 +1,6 @@
+use crate::error::Error::IllegalOperation;
 use crate::tasks::{Callbacks, Task};
 use serde::{Deserialize, Serialize};
-use crate::error::Error::IllegalOperation;
 
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -19,7 +19,7 @@ pub struct Response {
 
 impl Task<Response> for Request {
     fn run(&self) -> crate::Result<Response> {
-        let message = format!("hello...(from rust!) : {:?}", self);
+        let message = format!("promise::Task > {:?}", self);
         let response = Response {
             sample_greeting: message,
         };

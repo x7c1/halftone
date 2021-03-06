@@ -9,6 +9,6 @@ pub struct Request {
 
 impl Request {
     pub fn run(&self) {
-        println!("Sample1: task={:?}", self);
+        println!("invoke::Task > {:?}", self);
     }
 }
