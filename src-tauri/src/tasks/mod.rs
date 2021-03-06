@@ -1,5 +1,5 @@
-pub mod sample1;
-pub mod sample2;
+pub mod invoke;
+pub mod promise;
 
 // stands for (callback, error)
 pub type Callbacks = (String, String);

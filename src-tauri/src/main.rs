@@ -33,8 +33,8 @@ fn handler(webview: &mut Webview<'_>, arg: &str) -> std::result::Result<(), Stri
     println!("command received: {:?}", command);
 
     match command {
-        Cmd::Sample1(task) => task.run(),
-        Cmd::Sample2(task) => promise(task, webview),
+        Cmd::InvokeSample(task) => task.run(),
+        Cmd::PromisifySample(task) => promise(task, webview),
     }
     Ok(())
 }

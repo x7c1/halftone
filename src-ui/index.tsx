@@ -3,6 +3,7 @@ import * as ReactDOM from 'react-dom';
 import { hello } from './sample';
 import styles from './styles.css';
 import * as tauri from 'tauri/api/tauri';
+import * as PromisifySample from './tasks/PromisifySample';
 
 class App extends React.Component {
   render() {
@@ -23,17 +24,17 @@ class App extends React.Component {
 
   private static onClickInvoke() {
     tauri.invoke({
-      cmd: 'Sample1',
-      arg1: 'fooo-',
+      cmd: 'InvokeSample',
+      arg1: 'fooo-!?',
       arg2: 123456,
     });
   }
 
   private static onClickPromisified() {
     tauri
-      .promisified<Response<Sample2Response>>({
-        cmd: 'Sample2',
-        sampleArg1: 'fooo-',
+      .promisified<BackendResponse<PromisifySample.Response>>({
+        cmd: 'PromisifySample',
+        sampleArg1: 'foo!?',
         arg2: 123456,
       })
       .then(response => {
@@ -61,7 +62,7 @@ class App extends React.Component {
   }
 }
 
-type BackendError =
+export type BackendError =
   | { type: 'IllegalOperation'; message: string }
   | { type: 'Unexpected'; message: string };
 
@@ -75,11 +76,6 @@ interface Failure {
   payload: BackendError;
 }
 
-type Response<A> = Success<A> | Failure;
-
-interface Sample2Response {
-  type: 'Sample2Response';
-  sampleGreeting: string;
-}
+export type BackendResponse<A> = Success<A> | Failure;
 
 ReactDOM.render(<App />, document.getElementById('root'));
