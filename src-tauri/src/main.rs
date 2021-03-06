@@ -8,12 +8,13 @@ use serde::Serialize;
 use tauri::Webview;
 
 mod cmd;
-mod error;
+use cmd::Cmd;
 
+mod error;
 use error::Error;
 use error::Result;
 
-use cmd::Cmd;
+mod tasks;
 
 fn main() {
     println!("{}", hello());
@@ -29,13 +30,12 @@ fn handler(webview: &mut Webview<'_>, arg: &str) -> std::result::Result<(), Stri
     println!("command: {:?}", command);
 
     match command {
-        Cmd::Sample1(command) => {
-            println!("Sample1: command={:?}", command);
+        Cmd::Sample1(task) => {
+            println!("Sample1: task={:?}", task);
         }
-        Cmd::Sample2(command) => {
-            println!("Sample2: command={:?}", command);
-            let (callback, error) = (command.callback.to_string(), command.error.to_string());
-            tauri::execute_promise(webview, move || to_response(command.run()), callback, error)
+        Cmd::Sample2(task) => {
+            let (callback, error) = task.for_promise();
+            tauri::execute_promise(webview, move || to_response(task.run()), callback, error)
         }
     }
     Ok(())
