@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { hello } from './sample';
 import styles from './styles.css';
 import * as tauri from 'tauri/api/tauri';
 import * as PromisifySample from './tasks/PromisifySample';
@@ -9,13 +8,13 @@ class App extends React.Component {
   render() {
     return (
       <>
-        <h1 className={styles.sampleTitle}>{hello('Halftone')}</h1>
+        <h1 className={styles.sampleTitle}>Hello, Halftone.</h1>
         <p>
-          <button onClick={() => App.onClickInvoke()}>invoke(...)</button>
+          <button onClick={() => App.onClickInvoke()}>call invoke</button>
         </p>
         <p>
           <button onClick={() => App.onClickPromisified()}>
-            promisified(...)
+            call promisified
           </button>
         </p>
       </>

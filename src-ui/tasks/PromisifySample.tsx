@@ -1,4 +1,4 @@
-import {BackendTask, task} from "./backend";
+import { BackendTask, task } from '../halftone/backend';
 
 export interface Request {
   cmd: 'PromisifySample';

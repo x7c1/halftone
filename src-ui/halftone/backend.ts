@@ -1,6 +1,6 @@
 import { BackendError, BackendResult } from '../index';
 import * as tauri from 'tauri/api/tauri';
-import { EitherPromise } from './EitherPromise';
+import { EitherPromise } from '../general/EitherPromise';
 
 export type BackendTask<X, Y> = (_: X) => EitherPromise<Y, BackendError>;
 
