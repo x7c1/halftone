@@ -61,7 +61,7 @@ class App extends React.Component {
   }
 }
 
-type ApplicationError =
+type BackendError =
   | { type: 'IllegalOperation'; message: string }
   | { type: 'Unexpected'; message: string };
 
@@ -72,7 +72,7 @@ interface Success<A> {
 
 interface Failure {
   type: 'Failure';
-  payload: ApplicationError;
+  payload: BackendError;
 }
 
 type Response<A> = Success<A> | Failure;
