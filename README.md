@@ -1,5 +1,21 @@
 # Halftone
 
+A starter kit for Tauri app, which includes common settings for:
+
+* Front-end
+    * [x] Module bundler: Webpack
+    * [x] Language: TypeScript
+    * [x] Library: React
+    * [x] Linter: ESLint
+    * [x] Formatter: Prettier
+* Back-end
+    * [x] Framework: Tauri
+    * [x] Structure: Rust workspace
+    * [x] Formatter & Linter: cargo-fmt
+* Others
+    * [x] CI: GitHub Actions
+    * [x] some utilities to avoid tedious boilerplate :)
+
 ## Build
 
 under development :
