@@ -3,33 +3,24 @@ import * as ReactDOM from 'react-dom';
 import styles from './styles.css';
 import * as tauri from 'tauri/api/tauri';
 import * as PromisifySample from './tasks/PromisifySample';
+import { useState } from 'react';
 
-class App extends React.Component {
-  render() {
-    return (
-      <>
-        <h1 className={styles.sampleTitle}>Hello, Halftone.</h1>
-        <p>
-          <button onClick={() => App.onClickInvoke()}>call invoke</button>
-        </p>
-        <p>
-          <button onClick={() => App.onClickPromisified()}>
-            call promisified
-          </button>
-        </p>
-      </>
-    );
-  }
+const App = () => {
+  const [messageAfterInvoke, setMessage1] = useState('default1');
+  const [messageAfterPromisified, setMessage2] = useState('default2');
 
-  private static onClickInvoke() {
+  const onClickInvoke = () => {
     tauri.invoke({
       cmd: 'InvokeSample',
       arg1: 'fooo',
       arg2: 123456,
     });
-  }
+    setMessage1('tauri.invoke called. see terminal output.');
+  };
 
-  private static onClickPromisified() {
+  const onClickPromisified = () => {
+    setMessage2('running');
+
     PromisifySample.run({
       cmd: 'PromisifySample',
       sampleArg1: 'foo',
@@ -37,6 +28,7 @@ class App extends React.Component {
     })
       .then(x => {
         console.debug('success returned:', x);
+        setMessage2(x.sampleGreeting);
       })
       .catch(e => {
         console.error('failure returned:', e);
@@ -44,8 +36,24 @@ class App extends React.Component {
           console.error(e.message);
         }
       });
-  }
-}
+  };
+
+  return (
+    <>
+      <h1 className={styles.sampleTitle}>Hello, Halftone.</h1>
+
+      <section>
+        <button onClick={onClickInvoke}>call invoke</button>
+        <pre>{messageAfterInvoke}</pre>
+      </section>
+
+      <section>
+        <button onClick={onClickPromisified}>call promisified</button>
+        <pre>response from backend : {messageAfterPromisified}</pre>
+      </section>
+    </>
+  );
+};
 
 export type BackendError =
   | { type: 'IllegalOperation'; message: string }

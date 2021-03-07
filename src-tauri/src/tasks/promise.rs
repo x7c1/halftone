@@ -1,11 +1,14 @@
 use crate::error::Error::IllegalOperation;
 use crate::tasks::{Callbacks, Task};
 use serde::{Deserialize, Serialize};
+use std::thread;
+use std::time::Duration;
 
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Request {
     sample_arg1: String,
+    arg2: i64,
     // reserved fields by tauri
     callback: String,
     error: String,
@@ -19,7 +22,10 @@ pub struct Response {
 
 impl Task<Response> for Request {
     fn run(&self) -> crate::Result<Response> {
-        let message = format!("promise::Task > {:?}", self);
+        let message = format!("promise::Task > {:#?}", self);
+        println!("sleeping");
+        thread::sleep(Duration::from_millis(1000));
+
         let response = Response {
             sample_greeting: message,
         };
