@@ -1,4 +1,3 @@
-use crate::error::Error::IllegalOperation;
 use crate::tasks::{Callbacks, Task};
 use serde::{Deserialize, Serialize};
 use std::thread;
@@ -30,7 +29,8 @@ impl Task<Response> for Request {
             sample_greeting: message,
         };
         Ok(response)
-        // Err(IllegalOperation { message })
+        // or return Err to test tauri.promisified
+        // Err(crate::Error::IllegalOperation { message })
     }
     fn for_tauri(&self) -> Callbacks {
         (self.callback.to_string(), self.error.to_string())

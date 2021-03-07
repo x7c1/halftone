@@ -45,15 +45,19 @@ where
     X: Serialize,
 {
     let (callback, error) = task.for_tauri();
-    tauri::execute_promise(webview, move || to_response(task.run()), callback, error)
+    tauri::execute_promise(
+        webview,
+        move || Ok(to_response(task.run())),
+        callback,
+        error,
+    )
 }
 
-fn to_response<A>(result: crate::Result<A>) -> tauri::Result<BackendResult<A, Error>> {
-    let response = match result {
+fn to_response<A>(result: crate::Result<A>) -> BackendResult<A, Error> {
+    match result {
         Ok(x) => BackendResult::Success(x),
         Err(x) => BackendResult::Failure(x),
-    };
-    Ok(response)
+    }
 }
 
 #[derive(Debug, Serialize)]
