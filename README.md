@@ -50,3 +50,7 @@ $ /usr/bin/halftone
 # uninstall
 $ sudo apt remove halftone
  ```
+
+## License
+
+Licensed under the [MIT license](./LICENSE).
