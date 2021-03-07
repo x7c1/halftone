@@ -38,7 +38,7 @@ jobs:
       - run: |
           cargo fmt -- --check
       - run: |
-          CARGO_BUILD_TARGET_DIR=$(pwd)/src-tauri/target cargo clippy --release
+          cargo clippy -- -D warnings
       - run: |
           cargo install tauri-bundler
       - run: |
