@@ -11,7 +11,8 @@ A starter kit for Tauri app, which includes common settings for:
 * Back-end
     * [x] Framework: Tauri
     * [x] Structure: Rust workspace
-    * [x] Formatter & Linter: cargo-fmt
+    * [x] Linter: cargo-clippy
+    * [x] Formatter: cargo-fmt
 * Others
     * [x] CI: GitHub Actions
     * [x] some utilities to avoid tedious boilerplate :)
