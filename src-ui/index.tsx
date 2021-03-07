@@ -1,74 +1,80 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import styles from './styles.css';
-import * as tauri from 'tauri/api/tauri';
-import * as PromisifySample from './tasks/PromisifySample';
 import { useState } from 'react';
+import * as ReactDOM from 'react-dom';
+import * as tauri from 'tauri/api/tauri';
+
+import styles from './styles.css';
+import * as PromisifySample from './tasks/PromisifySample';
 
 const App = () => {
-  const [messageAfterInvoke, setMessage1] = useState('default1');
-  const [messageAfterPromisified, setMessage2] = useState('default2');
+  return (
+    <>
+      <h1 className={styles.sampleTitle}>Hello, Halftone.</h1>
+      <InvokeSampleArea />
+      <PromisifiedSampleArea />
+    </>
+  );
+};
 
-  const onClickInvoke = () => {
+const InvokeSampleArea = () => {
+  const [message, setMessage] = useState('<empty>');
+  return (
+    <section>
+      <button onClick={onClick}>
+        <code>tauri.invoke(...)</code>
+      </button>
+      <pre>{message}</pre>
+    </section>
+  );
+
+  function onClick() {
     tauri.invoke({
       cmd: 'InvokeSample',
       arg1: 'fooo',
       arg2: 123456,
     });
-    setMessage1('tauri.invoke called. see terminal output.');
-  };
+    setMessage('tauri.invoke called. see terminal output.');
+  }
+};
 
-  const onClickPromisified = () => {
-    setMessage2('running');
+const PromisifiedSampleArea = () => {
+  const [message, setMessage] = useState('<empty>');
+  return (
+    <section>
+      <button onClick={onClick}>
+        <code>tauri.promisified(...)</code>
+      </button>
+      <pre>response from backend : {message}</pre>
+    </section>
+  );
 
-    PromisifySample.run({
+  function onClick() {
+    setMessage('<running>');
+    callPromisified().then(x => {
+      const message = x?.sampleGreeting ?? 'failed to call promisified()';
+      setMessage(message);
+    });
+  }
+
+  function callPromisified() {
+    const request: PromisifySample.Request = {
       cmd: 'PromisifySample',
       sampleArg1: 'foo',
       arg2: 123456,
-    })
-      .then(x => {
-        console.debug('success returned:', x);
-        setMessage2(x.sampleGreeting);
+    };
+    return PromisifySample.run(request)
+      .then(response => {
+        console.debug('success returned:', response);
+        return response;
       })
       .catch(e => {
         console.error('failure returned:', e);
         if (e.type == 'IllegalOperation') {
           console.error(e.message);
         }
+        return null;
       });
-  };
-
-  return (
-    <>
-      <h1 className={styles.sampleTitle}>Hello, Halftone.</h1>
-
-      <section>
-        <button onClick={onClickInvoke}>call invoke</button>
-        <pre>{messageAfterInvoke}</pre>
-      </section>
-
-      <section>
-        <button onClick={onClickPromisified}>call promisified</button>
-        <pre>response from backend : {messageAfterPromisified}</pre>
-      </section>
-    </>
-  );
+  }
 };
-
-export type BackendError =
-  | { type: 'IllegalOperation'; message: string }
-  | { type: 'Unexpected'; message: string };
-
-interface Success<A> {
-  type: `Success`;
-  payload: A;
-}
-
-interface Failure {
-  type: 'Failure';
-  payload: BackendError;
-}
-
-export type BackendResult<A> = Success<A> | Failure;
 
 ReactDOM.render(<App />, document.getElementById('root'));

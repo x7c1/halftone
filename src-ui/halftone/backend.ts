@@ -1,6 +1,21 @@
-import { BackendError, BackendResult } from '../index';
 import * as tauri from 'tauri/api/tauri';
 import { EitherPromise } from '../general/EitherPromise';
+
+export type BackendError =
+  | { type: 'IllegalOperation'; message: string }
+  | { type: 'Unexpected'; message: string };
+
+interface Success<A> {
+  type: `Success`;
+  payload: A;
+}
+
+interface Failure {
+  type: 'Failure';
+  payload: BackendError;
+}
+
+export type BackendResult<A> = Success<A> | Failure;
 
 export type BackendTask<X, Y> = (_: X) => EitherPromise<Y, BackendError>;
 
