@@ -1,0 +1,15 @@
+# https://github.com/rust-lang/rustfmt/blob/master/Configurations.md
+
+# default : Auto
+newline_style = "Unix"
+
+# default : 2015
+edition = "2018"
+
+# default : false
+use_field_init_shorthand = true
+
+# what's this setting?
+# hint?
+# - https://internals.rust-lang.org/t/running-rustfmt-on-rust-lang-rust-and-other-rust-lang-repositories/8732/76
+# use_small_heuristics = "Default"

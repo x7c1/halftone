@@ -2,6 +2,7 @@
 
 # Compiled files
 dist
+target
 
 # Node
 node_modules

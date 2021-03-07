@@ -8,7 +8,7 @@ on:
     branches:
       - '*'
 jobs:
-  webpack-build:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -21,3 +21,26 @@ jobs:
       - run: |
           npm run webpack:build
           ls -lAh ./dist
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+      - run: |
+          sudo apt update && \
+          sudo apt install \
+              libwebkit2gtk-4.0-dev \
+              build-essential \
+              curl \
+              wget \
+              libssl-dev \
+              appmenu-gtk3-module \
+              libgtk-3-dev \
+              squashfs-tools
+      - run: |
+          cargo fmt -- --check
+      - run: |
+          cargo clippy -- -D warnings
+      - run: |
+          cargo install tauri-bundler
+      - run: |
+          npm run tauri:build
+          ls -lAh ./src-tauri/target/release/bundle/deb/
