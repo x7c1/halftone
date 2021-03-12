@@ -70,7 +70,7 @@ const config: webpack.Configuration = {
     new HtmlWebpackPlugin({
       template: paths.ui.join('index.html'),
       // injecting <script> to "head" doesn't work, it looks broken by tauri.
-      inject: "body",
+      inject: 'body',
     }),
     // https://webpack.js.org/plugins/source-map-dev-tool-plugin/
     new webpack.SourceMapDevToolPlugin({
