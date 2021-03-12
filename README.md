@@ -22,15 +22,20 @@ A starter kit for Tauri app, which includes common settings for:
 under development :
 
 ```sh
-# watch file change
+# start watching file change
 $ npm run tauri:dev
 ```
 
 for production :
 
 ```sh
+$ npm run webpack:build
+
 # release build
 $ npm run tauri:build
+
+# debug build
+$ npm run tauri:build -- --debug
 
 $ ls --almost-all --human-readable --size --format single-column ./src-tauri/target/release/bundle/deb/
 total 3.7M
