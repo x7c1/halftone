@@ -13,14 +13,15 @@ build = "src/build.rs"
 halftone-core = { path = "../src-core" }
 serde = { version = "1.0", features = [ "derive" ] }
 serde_json = "1.0"
-tauri = { version = "0.11", features = [ "all-api" ] }
+tauri = { git = "https://github.com/tauri-apps/tauri/", branch = "dev", features = ["api-all"] }
 
 [target."cfg(windows)".build-dependencies]
 winres = "0.1"
 
-[features]
-embedded-server = [ "tauri/embedded-server" ]
-no-server = [ "tauri/no-server" ]
+# no need to specify these features in next tauri?
+#[features]
+#embedded-server = [ "tauri/embedded-server" ]
+#no-server = [ "tauri/no-server" ]
 
 [[bin]]
 name = "halftone"
