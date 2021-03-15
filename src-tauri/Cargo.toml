@@ -13,7 +13,11 @@ build = "src/build.rs"
 halftone-core = { path = "../src-core" }
 serde = { version = "1.0", features = [ "derive" ] }
 serde_json = "1.0"
-tauri = { git = "https://github.com/tauri-apps/tauri/", branch = "dev", features = ["api-all"] }
+
+[dependencies.tauri]
+git = "https://github.com/tauri-apps/tauri/"
+branch = "dev"
+features = ["api-all"]
 
 [target."cfg(windows)".build-dependencies]
 winres = "0.1"
