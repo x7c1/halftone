@@ -9,3 +9,6 @@ node_modules
 
 # IntelliJ settings
 .idea
+
+# Cloned tauri branch
+tauri
