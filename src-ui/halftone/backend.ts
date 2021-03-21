@@ -21,11 +21,11 @@ export type BackendTask<X, Y> = (_: X) => EitherPromise<Y, BackendError>;
 
 export const toTask = (cmd: string) =>
   function <Y>(request: InvokeArgs): EitherPromise<Y, BackendError> {
-    console.debug("task request", request)
+    console.debug('task request', request);
     const underlying = invoke<BackendResult<Y>>(cmd, { request });
     return new EitherPromise<BackendResult<Y>, BackendError>(underlying).then(
       result => {
-        console.debug("task result", result)
+        console.debug('task result', result);
         switch (result.type) {
           case 'Success':
             return result.payload;

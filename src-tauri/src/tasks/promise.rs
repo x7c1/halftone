@@ -1,8 +1,8 @@
+use crate::BackendResult;
+use crate::HalftoneResult::Success;
 use serde::{Deserialize, Serialize};
 use std::thread;
 use std::time::Duration;
-use crate::BackendResult;
-use crate::HalftoneResult::{Success};
 
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "camelCase")]
