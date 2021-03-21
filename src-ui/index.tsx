@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { useState } from 'react';
 import * as ReactDOM from 'react-dom';
-import * as tauri from 'tauri/api/tauri';
 
 import styles from './styles.css';
 import * as PromisifySample from './tasks/PromisifySample';
+import { invoke } from 'tauri/tauri';
 
 const App = () => {
   return (
@@ -28,10 +28,11 @@ const InvokeSampleArea = () => {
   );
 
   function onClick() {
-    tauri.invoke({
-      cmd: 'InvokeSample',
-      arg1: 'fooo',
-      arg2: 123456,
+    invoke('invoke_sample', {
+      request: {
+        arg1: 'fooo',
+        arg2: 123456,
+      },
     });
     setMessage('tauri.invoke called. see terminal output.');
   }
@@ -57,12 +58,10 @@ const PromisifiedSampleArea = () => {
   }
 
   function callPromisified() {
-    const request: PromisifySample.Request = {
-      cmd: 'PromisifySample',
+    return PromisifySample.run({
       sampleArg1: 'foo',
       arg2: 123456,
-    };
-    return PromisifySample.run(request)
+    })
       .then(response => {
         console.debug('success returned:', response);
         return response;
@@ -70,7 +69,7 @@ const PromisifiedSampleArea = () => {
       .catch(e => {
         console.error('failure returned:', e);
         if (e.type == 'IllegalOperation') {
-          console.error(e.message);
+          console.error('message', e.message);
         }
         return null;
       });
