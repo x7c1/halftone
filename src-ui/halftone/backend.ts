@@ -1,5 +1,5 @@
-import * as tauri from 'tauri/api/tauri';
 import { EitherPromise } from '../general/EitherPromise';
+import { invoke, InvokeArgs } from 'tauri/tauri';
 
 export type BackendError =
   | { type: 'IllegalOperation'; message: string }
@@ -19,16 +19,19 @@ export type BackendResult<A> = Success<A> | Failure;
 
 export type BackendTask<X, Y> = (_: X) => EitherPromise<Y, BackendError>;
 
-export function task<X, Y>(request: X): EitherPromise<Y, BackendError> {
-  const underlying = tauri.promisified<BackendResult<Y>>(request);
-  return new EitherPromise<BackendResult<Y>, BackendError>(underlying).then(
-    result => {
-      switch (result.type) {
-        case 'Success':
-          return result.payload;
-        case 'Failure':
-          return Promise.reject(result.payload);
+export const toTask = (cmd: string) =>
+  function <Y>(request: InvokeArgs): EitherPromise<Y, BackendError> {
+    console.debug("task request", request)
+    const underlying = invoke<BackendResult<Y>>(cmd, { request });
+    return new EitherPromise<BackendResult<Y>, BackendError>(underlying).then(
+      result => {
+        console.debug("task result", result)
+        switch (result.type) {
+          case 'Success':
+            return result.payload;
+          case 'Failure':
+            return Promise.reject(result.payload);
+        }
       }
-    }
-  );
-}
+    );
+  };

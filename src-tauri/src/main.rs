@@ -5,12 +5,9 @@
 
 use halftone_core::hello;
 use serde::Serialize;
-use tauri::Webview;
-
 
 mod error;
 
-use crate::tasks::Task;
 use error::Error;
 use error::Result;
 
@@ -19,47 +16,20 @@ mod tasks;
 fn main() {
     println!("{}", hello());
 
-    tauri::AppBuilder::new()
-        .invoke_handler(handler)
-        .build()
+    tauri::AppBuilder::default()
+        .invoke_handler(tauri::generate_handler![
+            tasks::promise::promisify_sample,
+            tasks::invoke::invoke_sample,
+        ])
+        .build(tauri::generate_context!())
         .run();
-}
-
-fn handler(webview: &mut Webview<'_>, arg: &str) -> std::result::Result<(), String> {
-    let command = serde_json::from_str(arg).map_err(|e| e.to_string())?;
-    println!("command received: {:?}", command);
-
-    match command {
-        Cmd::InvokeSample(task) => task.run(),
-        Cmd::PromisifySample(task) => promise(task, webview),
-    }
-    Ok(())
-}
-
-fn promise<A, X>(task: A, webview: &mut Webview<'_>)
-where
-    A: Task<X>,
-    X: Serialize,
-{
-    let (callback, error) = task.for_tauri();
-    tauri::execute_promise(
-        webview,
-        move || Ok(to_response(task.run())),
-        callback,
-        error,
-    )
-}
-
-fn to_response<A>(result: crate::Result<A>) -> BackendResult<A, Error> {
-    match result {
-        Ok(x) => BackendResult::Success(x),
-        Err(x) => BackendResult::Failure(x),
-    }
 }
 
 #[derive(Debug, Serialize)]
 #[serde(tag = "type", content = "payload")]
-pub enum BackendResult<A, E> {
+pub enum HalftoneResult<A, E> {
     Success(A),
     Failure(E),
 }
+
+pub type BackendResult<A> = HalftoneResult<A, Error>;
