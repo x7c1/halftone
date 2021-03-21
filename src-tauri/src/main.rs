@@ -7,9 +7,6 @@ use halftone_core::hello;
 use serde::Serialize;
 use tauri::Webview;
 
-mod cmd;
-
-use cmd::Cmd;
 
 mod error;
 
