@@ -4,10 +4,10 @@
 )]
 
 use halftone_core::hello;
-use serde::Serialize;
 
 mod error;
 
+#[allow(unused)]
 use error::Error;
 use error::Result;
 
@@ -24,12 +24,3 @@ fn main() {
         .build(tauri::generate_context!())
         .run();
 }
-
-#[derive(Debug, Serialize)]
-#[serde(tag = "type", content = "payload")]
-pub enum HalftoneResult<A, E> {
-    Success(A),
-    Failure(E),
-}
-
-pub type BackendResult<A> = HalftoneResult<A, Error>;

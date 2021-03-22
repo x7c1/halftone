@@ -1,5 +1,3 @@
-use crate::BackendResult;
-use crate::HalftoneResult::Success;
 use serde::{Deserialize, Serialize};
 use std::thread;
 use std::time::Duration;
@@ -18,12 +16,11 @@ pub struct Response {
 }
 
 #[tauri::command]
-pub fn promisify_sample(request: Request) -> BackendResult<Response> {
+pub fn promisify_sample(request: Request) -> crate::Result<Response> {
     let message = format!("promisify_sample > {:#?}", request);
     println!("sleeping...{}", message);
     thread::sleep(Duration::from_millis(1000));
-    Success(Response {
+    Ok(Response {
         sample_greeting: message,
     })
-    // Failure(crate::Error::IllegalOperation { message })
 }
