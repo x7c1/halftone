@@ -55,9 +55,9 @@ jobs:
       - run: |
           cargo fmt -- --check
       - run: |
-          cargo clippy -- -D warnings
-      - run: |
           cargo install tauri-bundler
       - run: |
           npm run tauri:build
           ls -lAh ./src-tauri/target/release/bundle/deb/
+      - run: |
+          cargo clippy -- -D warnings
