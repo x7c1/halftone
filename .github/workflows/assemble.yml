@@ -11,11 +11,23 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: clone halftone repository
+        uses: actions/checkout@v2
+      - name: clone tauri repository
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git clone https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/tauri-apps/tauri
       - uses: actions/setup-node@v2
         with:
           node-version: '15.x'
-      - run: npm install
+      - name: halftone setup
+        run: npm install
+      - name: tauri setup
+        run: |
+          cd tauri/cli/tauri.js
+          npm install
+          npm run build
       - run: npm run prettier:check
       - run: npm run eslint
       - run: |
