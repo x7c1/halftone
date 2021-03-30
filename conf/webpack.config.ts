@@ -23,6 +23,8 @@ const config: webpack.Configuration = {
   output: {
     filename: 'main.js',
     path: paths.root.join('dist'),
+    // https://webpack.js.org/configuration/output/#outputclean
+    clean: true,
   },
   module: {
     rules: [
@@ -66,7 +68,6 @@ const config: webpack.Configuration = {
     extensions: ['.tsx', '.ts', '.js'],
   },
   plugins: [
-    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: paths.ui.join('index.html'),
       // injecting <script> to "head" doesn't work, it looks broken by tauri.
