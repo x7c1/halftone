@@ -30,7 +30,7 @@ jobs:
         run: |
           cd tauri/tooling/api
           yarn install
-          yarn run build-release
+          yarn run build
       - name: Set up halftone
         run: yarn install
       - run: yarn run prettier:check
