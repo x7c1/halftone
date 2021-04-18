@@ -15,7 +15,7 @@
     "prettier": "prettier --config prettier.config.js",
     "prettier:check": "npm run prettier -- --check $npm_package_config_prettier_targets",
     "prettier:write": "npm run prettier -- --write $npm_package_config_prettier_targets",
-    "tauri": "node ./tauri/cli/tauri.js/bin/tauri",
+    "tauri": "node ./tauri/tooling/cli.js/bin/tauri",
     "tauri:dev": "RUST_DEBUG=1 npm run tauri -- dev",
     "tauri:build": "RUST_DEBUG=1 npm run tauri -- build",
     "webpack": "webpack",
