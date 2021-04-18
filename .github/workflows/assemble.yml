@@ -25,12 +25,12 @@ jobs:
         run: |
           cd tauri/tooling/cli.js
           yarn install
-          yarn build-release
+          yarn run build-release
       - name: Set up tauri-api
         run: |
           cd tauri/tooling/api
           yarn install
-          yarn build-release
+          yarn run build-release
       - name: Set up halftone
         run: yarn install
       - run: yarn run prettier:check
