@@ -22,7 +22,7 @@ jobs:
         with:
           node-version: '15.x'
       - name: Set up halftone
-        run: npm install
+        run: yarn install
       - name: Set up tauri-cli
         run: |
           cd tauri/tooling/cli.js
