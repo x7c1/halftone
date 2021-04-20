@@ -1,5 +1,5 @@
 import { EitherPromise } from '../general/EitherPromise';
-import { invoke } from 'tauri/tauri';
+import { invoke } from '@tauri-apps/api/tauri';
 
 export type BackendError =
   | { type: 'IllegalOperation'; message: string }

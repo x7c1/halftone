@@ -21,43 +21,47 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '15.x'
-      - name: Set up tauri-cli
-        run: |
-          cd tauri/tooling/cli.js
-          yarn install
-          yarn run build-release
-      - name: Set up tauri-api
-        run: |
-          cd tauri/tooling/api
-          yarn install
-          yarn run build
+#      - name: Set up tauri-cli
+#        run: |
+#          cd tauri/tooling/cli.js
+#          yarn install
+#          yarn run build-release
+#      - name: Set up tauri-api
+#        run: |
+#          cd tauri/tooling/api
+#          yarn install
+#          yarn run build
       - name: Set up halftone
         run: yarn install
-      - run: yarn run prettier:check
-      - run: yarn run eslint
+      - run: |
+          yarn run prettier:check
+      - run: |
+          yarn run eslint
       - run: |
           yarn run webpack:build
           ls -lAh ./dist
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
-      - run: |
-          sudo apt update && \
-          sudo apt install \
-              libwebkit2gtk-4.0-dev \
-              build-essential \
-              curl \
-              wget \
-              libssl-dev \
-              appmenu-gtk3-module \
-              libgtk-3-dev \
-              squashfs-tools
+#      - run: |
+#          sudo apt update && \
+#          sudo apt install \
+#              libwebkit2gtk-4.0-dev \
+#              build-essential \
+#              curl \
+#              wget \
+#              libssl-dev \
+#              appmenu-gtk3-module \
+#              libgtk-3-dev \
+#              squashfs-tools
       - run: |
           cargo fmt -- --check
       - run: |
-          cargo install tauri-bundler
+          cargo install tauri-cli --version 1.0.0-beta-rc.2
+#      - run: |
+#          cargo install tauri-bundler
       - run: |
-          yarn run tauri:build
+          cargo tauri build
           ls -lAh ./target/release/bundle/deb/
       - run: |
           cargo clippy -- -D warnings

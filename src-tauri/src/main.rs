@@ -16,11 +16,11 @@ mod tasks;
 fn main() {
     println!("{}", hello());
 
-    tauri::AppBuilder::default()
+    tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![
             tasks::promise::promisify_sample,
             tasks::invoke::invoke_sample,
         ])
-        .build(tauri::generate_context!())
-        .run();
+        .run(tauri::generate_context!())
+        .expect("error while running tauri application");
 }
