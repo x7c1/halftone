@@ -11,13 +11,13 @@
     ]
   },
   "scripts": {
-    "cargo:build": "RUST_DEBUG=1 CARGO_BUILD_TARGET_DIR=$(pwd)/src-tauri/target cargo build",
     "eslint": "eslint . --ext .js,.jsx,.ts,.tsx --ignore-path conf/.eslintignore --config conf/.eslintrc.js",
     "prettier": "prettier --config prettier.config.js",
     "prettier:check": "npm run prettier -- --check $npm_package_config_prettier_targets",
     "prettier:write": "npm run prettier -- --write $npm_package_config_prettier_targets",
-    "tauri:dev": "RUST_DEBUG=1 CARGO_BUILD_TARGET_DIR=$(pwd)/src-tauri/target tauri dev",
-    "tauri:build": "RUST_DEBUG=1 CARGO_BUILD_TARGET_DIR=$(pwd)/src-tauri/target tauri build",
+    "tauri": "node ./tauri/tooling/cli.js/bin/tauri",
+    "tauri:dev": "RUST_DEBUG=1 npm run tauri -- dev",
+    "tauri:build": "RUST_DEBUG=1 npm run tauri -- build",
     "webpack": "webpack",
     "webpack:build": "TS_NODE_PROJECT='conf/tsconfig-for-webpack-config.json' webpack --config conf/webpack.config.ts",
     "webpack:serve": "TS_NODE_PROJECT='conf/tsconfig-for-webpack-config.json' webpack serve --mode development --config conf/webpack.config.ts"
@@ -26,30 +26,29 @@
   "author": "x7c1",
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "^14.14.31",
+    "@types/node": "^14.14.41",
     "@types/react": "^17.0.2",
-    "@types/react-dom": "^17.0.1",
-    "@types/webpack": "^4.41.26",
-    "@typescript-eslint/eslint-plugin": "^4.15.2",
-    "@typescript-eslint/parser": "^4.15.2",
-    "clean-webpack-plugin": "^3.0.0",
-    "css-loader": "^5.1.0",
+    "@types/react-dom": "^17.0.3",
+    "@types/webpack": "^5.28.0",
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@typescript-eslint/parser": "^4.22.0",
+    "css-loader": "^5.2.2",
     "css-modules-typescript-loader": "^4.0.1",
-    "eslint": "^7.20.0",
-    "eslint-config-prettier": "^8.1.0",
+    "eslint": "^7.24.0",
+    "eslint-config-prettier": "^8.2.0",
     "html-webpack-plugin": "^5.2.0",
     "prettier": "^2.2.1",
     "style-loader": "^2.0.0",
-    "ts-loader": "^8.0.17",
+    "ts-loader": "^8.1.0",
     "ts-node": "^9.1.1",
-    "typescript": "^4.1.5",
-    "webpack": "^5.24.0",
-    "webpack-cli": "^4.5.0",
+    "typescript": "^4.2.4",
+    "webpack": "^5.33.2",
+    "webpack-cli": "^4.6.0",
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "tauri": "^0.14.1"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "tauri": "./tauri/tooling/api/dist"
   }
 }

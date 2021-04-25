@@ -2,7 +2,7 @@
 name = "halftone"
 version = "0.1.0"
 description = "A Tauri App"
-authors = [ "you" ]
+authors = ["you"]
 license = ""
 repository = ""
 default-run = "halftone"
@@ -11,16 +11,25 @@ build = "src/build.rs"
 
 [dependencies]
 halftone-core = { path = "../src-core" }
-serde = { version = "1.0", features = [ "derive" ] }
+serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
-tauri = { version = "0.11", features = [ "all-api" ] }
+
+[dependencies.tauri]
+git = "https://github.com/tauri-apps/tauri/"
+branch = "dev"
+features = ["api-all"]
+
+[build-dependencies.tauri_build]
+git = "https://github.com/tauri-apps/tauri/"
+branch = "dev"
+package = "tauri-build"
+features = ["codegen"]
 
 [target."cfg(windows)".build-dependencies]
 winres = "0.1"
 
 [features]
-embedded-server = [ "tauri/embedded-server" ]
-no-server = [ "tauri/no-server" ]
+custom-protocol = ["tauri/custom-protocol"]
 
 [[bin]]
 name = "halftone"

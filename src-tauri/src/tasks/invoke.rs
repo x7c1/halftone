@@ -7,8 +7,9 @@ pub struct Request {
     arg2: i64,
 }
 
-impl Request {
-    pub fn run(&self) {
-        println!("invoke::Task > {:?}", self);
-    }
+#[tauri::command]
+pub fn invoke_sample(request: Request) -> String {
+    let message = format!("invoke_sample > {:#?}", request);
+    println!("invoked...{}", message);
+    message
 }
