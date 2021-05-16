@@ -1,5 +1,5 @@
 import { BackendTask, toTask } from '../halftone/backend';
-import { InvokeArgs } from 'tauri/tauri';
+import { InvokeArgs } from '@tauri-apps/api/tauri';
 
 export interface Request extends InvokeArgs {
   sampleArg1: string;

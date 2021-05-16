@@ -2,13 +2,13 @@
 
 A starter kit for Tauri app, which includes common settings for:
 
-* Front-end
+* Frontend
     * [x] Module bundler: Webpack
     * [x] Language: TypeScript
     * [x] Library: React
     * [x] Linter: ESLint
     * [x] Formatter: Prettier
-* Back-end
+* Backend
     * [x] Framework: Tauri
     * [x] Structure: Rust workspace
     * [x] Linter: cargo-clippy
@@ -23,7 +23,7 @@ under development :
 
 ```sh
 # start watching file change
-$ npm run tauri:dev
+$ cargo tauri dev
 ```
 
 for production :
@@ -32,10 +32,10 @@ for production :
 $ npm run webpack:build
 
 # release build
-$ npm run tauri:build
+$ cargo tauri build
 
 # debug build
-$ npm run tauri:build -- --debug
+$ cargo tauri build --debug
 
 $ ls --almost-all --human-readable --size --format single-column ./src-tauri/target/release/bundle/deb/
 total 3.7M

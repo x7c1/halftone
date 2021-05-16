@@ -4,7 +4,7 @@ import * as ReactDOM from 'react-dom';
 
 import styles from './styles.css';
 import * as PromisifySample from './tasks/PromisifySample';
-import { invoke } from 'tauri/tauri';
+import { invoke } from '@tauri-apps/api/tauri';
 
 const App = () => {
   return (

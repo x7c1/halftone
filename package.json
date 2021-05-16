@@ -15,9 +15,6 @@
     "prettier": "prettier --config prettier.config.js",
     "prettier:check": "npm run prettier -- --check $npm_package_config_prettier_targets",
     "prettier:write": "npm run prettier -- --write $npm_package_config_prettier_targets",
-    "tauri": "node ./tauri/tooling/cli.js/bin/tauri",
-    "tauri:dev": "RUST_DEBUG=1 npm run tauri -- dev",
-    "tauri:build": "RUST_DEBUG=1 npm run tauri -- build",
     "webpack": "webpack",
     "webpack:build": "TS_NODE_PROJECT='conf/tsconfig-for-webpack-config.json' webpack --config conf/webpack.config.ts",
     "webpack:serve": "TS_NODE_PROJECT='conf/tsconfig-for-webpack-config.json' webpack serve --mode development --config conf/webpack.config.ts"
@@ -49,6 +46,6 @@
   "dependencies": {
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "tauri": "./tauri/tooling/api/dist"
+    "@tauri-apps/api": "1.0.0-beta.1"
   }
 }
