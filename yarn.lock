@@ -64,10 +64,10 @@
     "@nodelib/fs.scandir" "2.1.4"
     fastq "^1.6.0"
 
-"@tauri-apps/api@1.0.0-beta-rc.2":
-  version "1.0.0-beta-rc.2"
-  resolved "https://registry.yarnpkg.com/@tauri-apps/api/-/api-1.0.0-beta-rc.2.tgz#85a8220be584b1cfeeb8b6f6106b0d529e44ddb3"
-  integrity sha512-bWHW9bDPe2xfsyEAFeNipstNKzVdYX3iWaVb/9Kc1lXu8htcJcy3wWDH9IyUw0PdQh2TF2rQ4Zkdia0FAkGLXQ==
+"@tauri-apps/api@1.0.0-beta.4":
+  version "1.0.0-beta.4"
+  resolved "https://registry.yarnpkg.com/@tauri-apps/api/-/api-1.0.0-beta.4.tgz#f78e443b7d34c6ca637c95586686d23e4ab3122c"
+  integrity sha512-PWO3ULlMVW8p70wFWjkHVCfkI/ewRX/CwSDX016nn4xSOrMwFICswPsqOcYBdQDPClagIm/4FuRuqkn8dEj0qg==
 
 "@types/eslint-scope@^3.7.0":
   version "3.7.0"
