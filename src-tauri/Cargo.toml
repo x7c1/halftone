@@ -15,11 +15,11 @@ serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 
 [dependencies.tauri]
-version = "1.0.0-beta.1"
+version = "1.0.0-beta.4"
 features = ["api-all"]
 
 [build-dependencies.tauri-build]
-version = "1.0.0-beta.0"
+version = "1.0.0-beta.2"
 features = ["codegen"]
 
 [target."cfg(windows)".build-dependencies]
